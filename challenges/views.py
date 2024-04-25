@@ -17,6 +17,16 @@ monthly_challenges = {
     "december": "Be kind",
 }
 
+def index(request):
+    list_items = ""
+    months = list(monthly_challenges.keys())
+
+    for month in months:
+        capitalized = month.capitalize()
+        month_path = reverse("month-challenge", args=[month])
+        list_items += f"<li><a href=\"{month_path}\">{capitalized}</a></li>"
+    response_data= f"<ul>{list_items}</ul>"
+    return HttpResponse(response_data, content_type="text/html")
 
 def monthly_challenges_by_number(request, month):
     months = list(monthly_challenges.keys())
